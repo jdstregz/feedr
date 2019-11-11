@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { ThemeProvider } from '@material-ui/styles';
+import { fetchSession } from './actions/authActions';
+import PropTypes from 'prop-types';
+import theme from './themes/theme';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import LoginPage from './components/Auth/LoginPage';
+import Dash from './components/Dashboard/Dash';
+import { SnackbarProvider } from 'notistack';
 
-function App() {
+const App = props => {
+  const { fetchSession } = props;
+  useEffect(() => {
+    fetchSession();
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path={'/login'} component={LoginPage} />
+              <Route path={'/'} component={Dash} />
+            </Switch>
+          </BrowserRouter>
+        </SnackbarProvider>
+      </ThemeProvider>
     </div>
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+  };
 }
 
-export default App;
+App.propTypes = {
+  auth: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.shape({})]).isRequired,
+  fetchSession: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, { fetchSession })(App);
