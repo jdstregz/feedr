@@ -32,10 +32,17 @@ const mongooseURI = `${process.env.FEEDR_DB_URI_PREFIX + process.env.FEEDR_DB_US
   process.env.FEEDR_DB_PASSWORD
 }${process.env.FEEDR_DB_URI_SUFFIX}`;
 
-mongoose.connect(mongooseURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose
+  .connect(mongooseURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    logger.info('DB Connected');
+  })
+  .catch(err => {
+    logger.error(`DB NOT Connected. Error: ${err.message}`);
+  });
 
 // Applies smaller middleware functions that set HTTP res headers.
 // https://helmetjs.github.io/docs/

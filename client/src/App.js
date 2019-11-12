@@ -8,15 +8,19 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from './components/Auth/LoginPage';
 import Dash from './components/Dashboard/Dash';
 import { SnackbarProvider } from 'notistack';
+import { Helmet } from 'react-helmet';
 
 const App = props => {
   const { fetchSession } = props;
   useEffect(() => {
     fetchSession();
-  });
+  }, [fetchSession]);
 
   return (
-    <div className="App">
+    <div>
+      <Helmet>
+        <style>{`body { background-color: ${theme.palette.background.main}; }`}</style>
+      </Helmet>
       <ThemeProvider theme={theme}>
         <SnackbarProvider
           anchorOrigin={{

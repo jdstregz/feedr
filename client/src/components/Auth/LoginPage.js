@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import useStyles from './styles/LoginPage.styles';
 import { startSession, signupRequest } from '../../actions/authActions';
 import { Paper, Grid, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
+import logo from '../../assets/logo.png';
 
 const LoginPage = props => {
   const classes = useStyles();
-  const { auth, history, startSession } = props;
+  const { auth, history, startSession, signupRequest } = props;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -21,7 +22,6 @@ const LoginPage = props => {
   const [validations, setValidations] = useState({});
 
   const validateFields = () => {
-    setValidations({});
     const tempValidations = {};
     if (!username) {
       tempValidations.username = 'Missing username';
@@ -40,10 +40,12 @@ const LoginPage = props => {
         tempValidations.name = 'No name';
       }
       // TODO: PUT IN AN EMAIL VALIDATOR
-      setValidations(tempValidations);
     }
+    setValidations(tempValidations);
+    console.log(validations);
     return Object.values(tempValidations).length === 0;
   };
+  console.log(validations);
 
   const signupAction = async () => {
     if (requestSent) {
@@ -51,9 +53,11 @@ const LoginPage = props => {
     }
     setRequestSent(true);
     try {
+      console.log('sending request');
       const success = await signupRequest(email, username, password, name);
       setRequestSent(false);
     } catch (err) {
+      console.log(err);
       setErrorText(err.message);
       setRequestSent(false);
     }
@@ -76,6 +80,7 @@ const LoginPage = props => {
   const authAction = () => {
     if (validateFields()) {
       if (signup) {
+        console.log(signup);
         signupAction();
       } else {
         login();
@@ -90,11 +95,7 @@ const LoginPage = props => {
   });
 
   const headerTitle = () => {
-    return (
-      <Typography variant={'h5'} className={classes.loginHeader}>
-        Feedr
-      </Typography>
-    );
+    return <Typography variant={'h5'}>Feedr</Typography>;
   };
 
   const signupLoginText = () => {
@@ -114,13 +115,15 @@ const LoginPage = props => {
     setSuccessText('');
     setErrorText('');
     setSignup(!signup);
+    setValidations({});
   };
 
   return (
     <div>
       <Paper className={classes.loginPane}>
         <Grid container spacing={2} justify={'center'} alignContent={'center'}>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{ textAlign: 'center' }}>
+            <img alt={'Logo'} src={logo} className={classes.logo} />
             {headerTitle()}
           </Grid>
           <Grid item xs={12}>
@@ -243,7 +246,7 @@ LoginPage.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
-  loginRequest: PropTypes.func.isRequired,
+  startSession: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -252,4 +255,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { startSession })(withRouter(LoginPage));
+export default connect(mapStateToProps, { startSession, signupRequest })(withRouter(LoginPage));

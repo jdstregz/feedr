@@ -16,7 +16,7 @@ passport.use(
   'signup',
   new LocalStrategy(
     {
-      usernameField: 'email',
+      usernameField: 'username',
       passwordField: 'password',
       passReqToCallback: true,
     },
@@ -33,6 +33,7 @@ passport.use(
         logger.info(`Creating account for email: ${username}`);
         const user = await new User({
           username,
+          email: req.body.email,
           password,
           name: req.body.name,
         });

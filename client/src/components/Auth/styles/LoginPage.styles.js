@@ -15,8 +15,14 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: '#f73392',
   },
-  loginField: {
+  logo: {
+    height: 100,
     marginTop: theme.spacing(2),
+    marginBottom: -1 * theme.spacing(2),
+    textAlign: 'center',
+  },
+  loginField: {
+    marginTop: theme.spacing(1),
     marginBottom: theme.spacing(2),
   },
   textFieldContainer: {
@@ -24,7 +30,9 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(6),
   },
   formHelperText: {
-    marginBottom: theme.spacing(1),
+    marginBottom: 0,
+    marginTop: -1 * theme.spacing(1),
+    color: '#f50c00',
   },
   loginButton: {
     backgroundColor: '#f50c00',
