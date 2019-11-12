@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 const passport = require('passport');
 
 const envFile = process.env.NODE_ENV ? `config/.env.${process.env.NODE_ENV}` : 'config/.env';
@@ -17,11 +18,24 @@ environment.config({ path: path.resolve(__dirname, envFile) });
 
 const logger = require('./config/winston');
 
+// Models
+require('./models/User');
+
 // Services
-// require('./services/passport');
+require('./services/passport');
 
 logger.info('Application initializing.');
 const app = express();
+
+logger.info('Initializing FeedrDB Connection');
+const mongooseURI = `${process.env.FEEDR_DB_URI_PREFIX + process.env.FEEDR_DB_USERNAME}:${
+  process.env.FEEDR_DB_PASSWORD
+}${process.env.FEEDR_DB_URI_SUFFIX}`;
+
+mongoose.connect(mongooseURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // Applies smaller middleware functions that set HTTP res headers.
 // https://helmetjs.github.io/docs/
@@ -56,6 +70,10 @@ const morganFormat = 'combined';
 app.use(morgan(morganFormat, { stream: process.stdout }));
 
 app.use(passport.initialize());
+
+const authRoutes = require('./routes/authRoutes');
+
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 8090;
 app.listen(PORT, () => {

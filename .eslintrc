@@ -15,7 +15,7 @@
   },
   "extends": ["airbnb", "prettier"],
   "rules": {
-    "max-len": ["error", {"code": 120}],
+    "max-len": ["error", {"code": 100}],
     "prefer-promise-reject-errors": ["off"],
     "react/jsx-filename-extension": ["off"],
     "no-return-assign": ["off"],
