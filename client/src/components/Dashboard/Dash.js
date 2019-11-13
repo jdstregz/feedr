@@ -4,6 +4,7 @@ import SecuredRoute from '../Auth/SecuredRoute';
 import useStyles from './styles/Dash.styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import logo from '../../assets/logo.png';
+import DashDrawer from './DashDrawer';
 
 const Dash = props => {
   const classes = useStyles();
@@ -15,6 +16,7 @@ const Dash = props => {
           <Typography className={classes.title}>Feedr</Typography>
         </Toolbar>
       </AppBar>
+      <DashDrawer />
     </div>
   );
 };
