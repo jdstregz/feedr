@@ -1,4 +1,4 @@
-# feedr <img alt="logo" src="client/src/assets/logo.png" width="100px"  /> 
+# Feedr <img alt="logo" src="client/src/assets/logo.png" width="100px"  /> 
 Sports feed and odds dashboard with bet tracking and analysis tools.
 
 ## Why?
@@ -24,6 +24,9 @@ TODO:
 - Review and chart betting records against sports and odds data.
 - Receive analytic reports on trends for sports and odds data.
 - Have a pretty dashboard which is very customizable with various widgets.
+
+## How to run this?
+Right now, you can't. But once I'm done with MVP then I'll describe how.
 
 ### Any questions?
 Shoot me an email: jdstreger@gmail.com
