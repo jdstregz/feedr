@@ -35,6 +35,7 @@ const theme = responsiveFontSizes(
         white: '#ffffff',
         medium: '#474747',
         darkish: '#333333',
+        drawer: '#3c3c3c',
       },
       accent: {
         light: '#00f2ea',
