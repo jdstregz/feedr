@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
   logo: {
     height: 100,
     marginTop: theme.spacing(2),
-    marginBottom: -1 * theme.spacing(2),
+    marginBottom: theme.spacing(1),
     textAlign: 'center',
   },
   loginField: {

@@ -42,10 +42,8 @@ const LoginPage = props => {
       // TODO: PUT IN AN EMAIL VALIDATOR
     }
     setValidations(tempValidations);
-    console.log(validations);
     return Object.values(tempValidations).length === 0;
   };
-  console.log(validations);
 
   const signupAction = async () => {
     if (requestSent) {
@@ -53,11 +51,9 @@ const LoginPage = props => {
     }
     setRequestSent(true);
     try {
-      console.log('sending request');
-      const success = await signupRequest(email, username, password, name);
+      await signupRequest(email, username, password, name);
       setRequestSent(false);
     } catch (err) {
-      console.log(err);
       setErrorText(err.message);
       setRequestSent(false);
     }
@@ -95,7 +91,7 @@ const LoginPage = props => {
   });
 
   const headerTitle = () => {
-    return <Typography variant={'h5'}>Feedr</Typography>;
+    return <Typography variant={'h5'}>Dashr</Typography>;
   };
 
   const signupLoginText = () => {

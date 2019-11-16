@@ -7,9 +7,10 @@ export const fetchSession = () => async dispatch => {
   dispatch({ type: FETCH_SESSION, payload: res.data });
 };
 
-export const destroySession = () => async dispatch => {
+export const destroySession = history => async dispatch => {
   const res = await axios.get('/auth/logout');
   dispatch({ type: DESTROY_SESSION, payload: res.data });
+  history.push('/login');
 };
 
 export const startSession = (username, password) => async dispatch => {

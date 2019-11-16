@@ -1,68 +1,60 @@
+import React from 'react';
+import {
+  Dashboard,
+  Alarm,
+  Link,
+  Settings,
+  Router,
+  DataUsageSharp,
+  BeachAccess,
+} from '@material-ui/icons';
+
 const Routes = () => {
   return {
     dashboard: {
       text: 'Dashboard',
       link: '/dashboard',
-      icon: null,
-      description: 'Dashboard for quick profile view and feed subscription',
-      index: 0,
+      icon: <Dashboard />,
+      description: 'Dashboard for quick profile view and feeds',
     },
-    leagues: {
-      text: 'Leagues',
-      link: '/leagues',
-      icon: null,
-      description: 'Available sports leagues',
+    mainRoute: {
+      text: 'Route',
+      link: '/main-route',
+      icon: <Router />,
+      description: 'Main route',
       index: 1,
       subroutes: {
-        nba: {
-          index: 0,
-          text: 'NBA',
-          link: '/nba',
-          icon: null,
-          description: 'National Basketball Association',
+        sub1: {
+          text: 'Subroute 1',
+          link: '/sub-1',
+          icon: <DataUsageSharp />,
+          description: 'This is subroute 1',
         },
-        nhl: {
-          index: 1,
-          text: 'NHL',
-          link: '/nhl',
-          icon: null,
-          description: 'National Hockey League',
-        },
-        nfl: {
-          index: 2,
-          text: 'NFL',
-          link: '/nfl',
-          icon: null,
-          description: 'National Football League',
-        },
-        mlb: {
-          index: 3,
-          text: 'MLB',
-          icon: null,
-          description: 'Major League Baseball',
+        sub2: {
+          text: 'sub-2',
+          link: '/sub-2',
+          icon: <Link />,
+          description: 'This is subroute 2',
         },
       },
     },
     analytics: {
       text: 'Analytics',
       link: '/analytics',
-      icon: null,
-      description: 'Sports data/odds analytics',
-      index: 2,
+      icon: <BeachAccess />,
+      description: 'An example analytics route',
     },
-    betting: {
-      text: 'Betting History',
-      link: '/betting',
-      icon: null,
-      description: 'Betting win/loss history',
-      index: 3,
+    idk: {
+      text: 'I dunno',
+      link: '/i-d-k',
+      icon: <Alarm />,
+      description: 'Something',
     },
     profile: {
       text: 'Settings',
       link: '/settings',
-      icon: null,
+      icon: <Settings />,
       description: 'Profile settings',
-      index: 4,
     },
   };
 };
