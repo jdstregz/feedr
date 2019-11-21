@@ -6,6 +6,6 @@ const jwtRequired = passport.authenticate('jwt', { session: false });
 
 const router = express.Router();
 
-router.get('/odds', jwtRequired, OddsController.getOdds);
+router.get('/odds', jwtRequired, OddsController.getNBAOdds);
 
 module.exports = router;
