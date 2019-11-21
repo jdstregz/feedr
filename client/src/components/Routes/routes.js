@@ -7,7 +7,14 @@ import {
   Router,
   DataUsageSharp,
   BeachAccess,
+  SportsBaseball,
+  SportsBasketball,
+  SportsHockey,
+  SportsFootball,
+  Sports,
 } from '@material-ui/icons';
+import Leagues from '../Leagues/Leagues';
+import NBA from '../Leagues/NBA/NBA';
 
 const Routes = () => {
   return {
@@ -18,23 +25,36 @@ const Routes = () => {
       description: 'Dashboard for quick profile view and feeds',
     },
     mainRoute: {
-      text: 'Route',
-      link: '/main-route',
-      icon: <Router />,
+      text: 'Leagues',
+      link: '/leagues',
+      icon: <Sports />,
       description: 'Main route',
-      index: 1,
+      render: () => <Leagues />,
       subroutes: {
-        sub1: {
-          text: 'Subroute 1',
-          link: '/sub-1',
-          icon: <DataUsageSharp />,
-          description: 'This is subroute 1',
+        nba: {
+          text: 'NBA',
+          link: '/nba',
+          icon: <SportsBasketball />,
+          render: () => <NBA />,
+          description: 'National Basketball Association',
         },
-        sub2: {
-          text: 'sub-2',
-          link: '/sub-2',
-          icon: <Link />,
-          description: 'This is subroute 2',
+        nhl: {
+          text: 'NHL',
+          link: '/nhl',
+          icon: <SportsHockey />,
+          description: 'National Hockey League',
+        },
+        nfl: {
+          text: 'NFL',
+          link: '/nfl',
+          icon: <SportsFootball />,
+          description: 'National Football League',
+        },
+        mlb: {
+          text: 'MLB',
+          link: '/mlb',
+          icon: <SportsBaseball />,
+          description: 'Major League Baseball',
         },
       },
     },

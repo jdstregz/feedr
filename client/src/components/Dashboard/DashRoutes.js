@@ -10,12 +10,7 @@ const DashRoutes = () => {
         <div>
           {Object.values(subroutes).map(subroute => {
             return (
-              <Route
-                key={subroute.text}
-                exact
-                path={subroute.link}
-                render={() => <PlaceholderPage />}
-              />
+              <Route key={subroute.text} exact path={subroute.link} render={subroute.render} />
             );
           })}
         </div>
@@ -31,7 +26,7 @@ const DashRoutes = () => {
       {routeArray.map(route => {
         return (
           <div key={route.text}>
-            <Route exact path={route.link} render={() => <PlaceholderPage />} />
+            <Route exact path={route.link} render={route.render} />
             {renderSubroutes(route.subroutes)}
           </div>
         );
