@@ -28,9 +28,13 @@ const DashDrawer = props => {
 
   const renderSublist = (route, parentMenuIndex) => {
     return (
-      <Collapse in={selectedRouteIndex === parentMenuIndex} timeout={'auto'} unmountOnExit>
+      <Collapse key={route.text} in={selectedRouteIndex === parentMenuIndex} timeout={'auto'} unmountOnExit>
         <List component={'div'} disablePadding>
-          {Object.values(route.subroutes).map((subroute, index) => (
+          {Object.values(route.subroutes).map((subroute, index) => {
+            if (subroute.hide) {
+              return null;
+            }
+            return (
             <Tooltip
               title={subroute.text}
               key={subroute.text}
@@ -53,7 +57,7 @@ const DashDrawer = props => {
                 <ListItemText className={classes.sidebarText} primary={subroute.text} />
               </ListItem>
             </Tooltip>
-          ))}
+          )})}
         </List>
       </Collapse>
     );
@@ -79,7 +83,11 @@ const DashDrawer = props => {
         </IconButton>
       </div>
       <List className={classes.list}>
-        {routeArray.map((route, index) => (
+        {routeArray.map((route, index) => {
+          if (route.hide) {
+            return null;
+          }
+          return (
           <div key={route.text}>
             <Tooltip
               title={route.text}
@@ -102,7 +110,7 @@ const DashDrawer = props => {
             </Tooltip>
             {route.subroutes ? renderSublist(route, index) : null}
           </div>
-        ))}
+        )})}
       </List>
     </Drawer>
   );

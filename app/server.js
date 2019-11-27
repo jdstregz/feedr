@@ -20,7 +20,7 @@ const logger = require('./config/winston');
 
 // Models
 require('./models/User');
-
+require('./models/BlackJackGame');
 // Services
 require('./services/passport');
 
@@ -80,9 +80,11 @@ app.use(passport.initialize());
 
 const authRoutes = require('./routes/authRoutes');
 const nbaRoutes = require('./routes/nbaRoutes');
+const blackjackRoutes = require('./routes/blackjackRoutes');
 
 app.use('/auth', authRoutes);
 app.use('/nba', nbaRoutes);
+app.use('/api/blackjack', blackjackRoutes);
 
 const PORT = process.env.PORT || 8090;
 app.listen(PORT, () => {

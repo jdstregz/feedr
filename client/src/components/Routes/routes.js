@@ -1,11 +1,8 @@
 import React from 'react';
 import {
   Dashboard,
-  Alarm,
-  Link,
   Settings,
-  Router,
-  DataUsageSharp,
+  Money,
   BeachAccess,
   SportsBaseball,
   SportsBasketball,
@@ -15,6 +12,11 @@ import {
 } from '@material-ui/icons';
 import Leagues from '../Leagues/Leagues';
 import NBA from '../Leagues/NBA/NBA';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChessBoard, faCrown, faDice } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons/faHeart';
+import BlackJack from '../Casino/BlackJack/BlackJack';
+import BlackJackSimulator from '../Casino/BlackJack/BlackJackSimulator';
 
 const Routes = () => {
   return {
@@ -35,7 +37,6 @@ const Routes = () => {
           text: 'NBA',
           link: '/nba',
           icon: <SportsBasketball />,
-          render: () => <NBA />,
           description: 'National Basketball Association',
         },
         nhl: {
@@ -64,11 +65,38 @@ const Routes = () => {
       icon: <BeachAccess />,
       description: 'An example analytics route',
     },
-    idk: {
-      text: 'I dunno',
-      link: '/i-d-k',
-      icon: <Alarm />,
-      description: 'Something',
+    casino: {
+      text: 'Casino',
+      link: '/casino',
+      icon: <Money />,
+      description: 'Casino Games',
+      subroutes: {
+        blackjack: {
+          text: 'BlackJack',
+          link: '/blackjack',
+          icon: <FontAwesomeIcon icon={faCrown} />,
+          render: () => <BlackJack />,
+          description: 'BlackJack Simulator',
+        },
+        roulette: {
+          text: 'Roulette',
+          link: '/roulette',
+          icon: <FontAwesomeIcon icon={faChessBoard} />,
+          description: 'Roulette Simulator',
+        },
+        craps: {
+          text: 'Craps',
+          link: '/craps',
+          icon: <FontAwesomeIcon icon={faDice} />,
+          description: 'Craps Simulator',
+        },
+        mlb: {
+          text: 'Poker',
+          link: '/poker',
+          icon: <FontAwesomeIcon icon={faHeart} />,
+          description: 'Major League Baseball',
+        },
+      },
     },
     profile: {
       text: 'Settings',
@@ -76,6 +104,12 @@ const Routes = () => {
       icon: <Settings />,
       description: 'Profile settings',
     },
+    blackJackSimulator: {
+      link: '/blackjack-simulator',
+      text: "BlackJackSim",
+      render: () => <BlackJackSimulator/>,
+      hide: true
+    }
   };
 };
 export default Routes;

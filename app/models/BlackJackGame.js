@@ -2,32 +2,47 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const Card = new Schema({
+const CardSchema = new Schema({
   suite: String,
   value: String
 },   { timestamps: true },);
 
-const Hand = new Schema({
+const HandSchema = new Schema({
   user: {type: Schema.Types.ObjectId, ref: 'User'},
   placement: Number,
-  hand: [Card],
+  hand: [CardSchema],
   value: Number,
 },   { timestamps: true },);
 
-const Shoe = new Schema({
-  shoe: [String],
-  hands: [Hand],
-  turn: Number,
+const ShoeSchema = new Schema({
+  shoe: [CardSchema],
+  numDecks: Number
 },   { timestamps: true },);
 
 const BlackJackGameSchema = new Schema(
   {
-    shoe: String,
-    password: String,
-    name: String,
-    email: String,
+    shoe: ShoeSchema,
+    dealerHand: [CardSchema],
+    hands: [HandSchema],
+    host: {type: Schema.Types.ObjectId, ref: 'User'},
   },
   { timestamps: true },
 );
 
+HandSchema.methods.clearHands = () => {
+  this.hand = [];
+};
+
+BlackJackGameSchema.methods.clearHands = () => {
+  this.dealerHand = [];
+  if (this.hands && this.hands.length > 0) {
+    this.hands.forEach(playerhand => {
+      playerhand.clearHands();
+    });
+  }
+};
+
+mongoose.model('Shoe', ShoeSchema);
+mongoose.model('Hand', HandSchema);
+mongoose.model('Card', CardSchema);
 mongoose.model('BlackJackGame', BlackJackGameSchema);
