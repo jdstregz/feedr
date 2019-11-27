@@ -5,25 +5,25 @@ const roll = () => {
 
 const rolls =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-const sim = (bankroll, rounds) => {
+const sim = (bankroll, rounds, savePoint, startingBankroll, incrementSave, incrementDeposit, continueIfYourUp, survivalRounds) => {
   let saved = 0;
   for (let i = 0; i < rounds; i++) {
     if (bankroll < 40) {
       console.log("Oops we ran out of money");
       break;
     }
-    if (bankroll > 400) {
+    if (bankroll > savePoint) {
       console.log(`We are saving some at round ${  i}`);
-      saved += 320;
-      bankroll -= 320;
+      saved += startingBankroll;
+      bankroll -= startingBankroll;
     }
-    if (saved >= 320 && bankroll > 150) {
+    if (saved >= savePoint && bankroll > incrementSave) {
       console.log("we are stashing some money")
-      saved += 100;
-      bankroll -= 100;
+      saved += incrementDeposit;
+      bankroll -= incrementDeposit;
     }
 
-    if (i === rounds - 1 && saved && bankroll) {
+    if (i === rounds - 1 && saved >= savePoint && bankroll >= incrementSave && continueIfYourUp) {
       i -= 1;
     }
 
@@ -33,7 +33,6 @@ const sim = (bankroll, rounds) => {
     console.log("Placing bets on the 6 and 8 for 18 a piece")
     bankroll -= 36
     console.log(`Risking 36. Bankroll is $${  bankroll}`)
-    const coveredNumbers = [6, 8];
     const bets = [null, null, 0, 0, 0, 0, 18, null, 18, 0, 0, 0, 0];
     const payouts = [null, null, 30, 15, 2, 1.5, 1.2, null, 1.2, 1.5, 2, 15, 30];
     let stacked = false;
@@ -113,7 +112,7 @@ const sim = (bankroll, rounds) => {
         }
       }
 
-      if (survival === 5) {
+      if (survival === survivalRounds) {
         console.log("You survived!")
         let total = 0;
         for (const bet of bets) {
@@ -144,7 +143,7 @@ const numRounds = 1000;
 let winsOverDouble = 0;
 
 for (let i = 0; i < numRounds; i += 1) {
-  const result = sim(320, 25);
+  const result = sim(320, 30, 500, 320, 160, 80, false, 2);
   if (result >= 320) {
     wins += 1;
     averageWin += result;
