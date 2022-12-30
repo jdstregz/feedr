@@ -75,7 +75,7 @@
     "eslint-plugin-react-hooks": "^2.2.0",
     "husky": "^3.0.9",
     "lint-staged": "^9.4.2",
-    "mocha": "^6.2.2",
+    "mocha": "^10.2.0",
     "nyc": "^14.1.1",
     "opener": "^1.5.1",
     "prettier": "^1.19.1",
